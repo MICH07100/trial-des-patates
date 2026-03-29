@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trial Des Patates — 22 Mars 2026</title>
+    <style>
+        /* ══ RESET & VARIABLES ══════════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary:   #d4a574;
+            --secondary: #8b7355;
+            --accent:    #c9a961;
+            --carbon:    #c6c6c6;
+            --carbon2:   #b8b8b8;
+            --gold:      #c9a961;
+            --text:      #1e1e1e;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* ── Fond gris clair effet carbone ── */
+            background-color: var(--carbon);
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0,0,0,.07) 0px, rgba(0,0,0,.07) 1px,
+                    rgba(255,255,255,.09) 1px, rgba(255,255,255,.09) 2px,
+                    transparent 2px, transparent 8px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0,0,0,.07) 0px, rgba(0,0,0,.07) 1px,
+                    rgba(255,255,255,.09) 1px, rgba(255,255,255,.09) 2px,
+                    transparent 2px, transparent 8px
+                );
+            background-size: 8px 8px;
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ══ HERO ═══════════════════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            /* Hero charcoal carbone — gardé sombre pour que le titre reste lisible */
+            background-color: #2c2c2c;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0,0,0,.1) 0px, rgba(0,0,0,.1) 1px,
+                    rgba(255,255,255,.06) 1px, rgba(255,255,255,.06) 2px,
+                    transparent 2px, transparent 8px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0,0,0,.1) 0px, rgba(0,0,0,.1) 1px,
+                    rgba(255,255,255,.06) 1px, rgba(255,255,255,.06) 2px,
+                    transparent 2px, transparent 8px
+                );
+            background-size: 8px 8px;
+        }
+
+        /* Grille de points subtils */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Halo ambiance */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(ellipse at center, rgba(212,165,116,.07) 0%, transparent 65%);
+            animation: floatBg 18s ease-in-out infinite;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0, 0); }
+            50%       { transform: translate(40px, -40px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: slideUp .9s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: .06em;
+            background: linear-gradient(135deg, var(--primary) 30%, var(--accent) 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(212,165,116,.3)); }
+            50%       { filter: drop-shadow(0 0 24px rgba(201,169,97,.65)); }
+        }
+
+        .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--accent); margin: .55rem 0; }
+        .hero-date     { font-size: 1.05rem; color: var(--gold); font-weight: 700; margin-top: 1.2rem;
+                         letter-spacing: .03em; }
+
+        /* ── Motos SVG ── */
+        .moto-wrap {
+            position: absolute;
+            bottom: 0;
+            width: clamp(160px, 20vw, 270px);
+            opacity: .45;
+            z-index: 5;
+        }
+
+        .moto-wrap.moto-left  { left:  -15px; animation: motorockL 5s ease-in-out infinite; }
+        .moto-wrap.moto-right { right: -15px; animation: motorockR 5s ease-in-out infinite 2.5s; }
+
+        @keyframes motorockL {
+            0%, 100% { transform: scaleX(-1) translateY(0)    rotate(0deg); }
+            35%       { transform: scaleX(-1) translateY(-10px) rotate(1.5deg); }
+            70%       { transform: scaleX(-1) translateY(-4px)  rotate(-.8deg); }
+        }
+        @keyframes motorockR {
+            0%, 100% { transform: translateY(0)    rotate(0deg); }
+            35%       { transform: translateY(-10px) rotate(-1.5deg); }
+            70%       { transform: translateY(-4px)  rotate(.8deg); }
+        }
+
+        /* ══ SPONSORS ════════════════════════════════════════════════════ */
+        .sponsors-bar {
+            background: rgba(0,0,0,.18);
+            border-top:    2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding: .9rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .sponsors-bar img {
+            height: 68px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,.55));
+            transition: transform .3s;
+        }
+        .sponsors-bar img:hover { transform: scale(1.06); }
+
+        /* ══ SECTIONS (base) ═════════════════════════════════════════════ */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: clamp(1.7rem, 4vw, 2.5rem);
+            color: var(--secondary);
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ══ ZOOM LIEU ═══════════════════════════════════════════════════ */
+        .zoom-section { height: 350vh; position: relative; }
+
+        .zoom-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .zoom-frame {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .zoom-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,.55) 0%,
+                transparent 25%,
+                transparent 75%,
+                rgba(0,0,0,.55) 100%
+            );
+            pointer-events: none;
+        }
+
+        .zoom-caption {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            pointer-events: none;
+            text-shadow: 0 2px 12px rgba(0,0,0,.7);
+        }
+        .zoom-caption h2 { font-size: clamp(1.5rem, 4vw, 2.6rem); color: var(--primary); margin-bottom: .4rem; }
+        .zoom-caption p  { font-size: 1.1rem; color: var(--accent); }
+
+        /* ══ CHEFS D'ORCHESTRE ═══════════════════════════════════════════ */
+        .organizers-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .organizer-card {
+            background: linear-gradient(135deg, rgba(212,165,116,.11), rgba(139,115,85,.11));
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            width: 240px;
+            transition: transform .3s, box-shadow .3s;
+        }
+        .organizer-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(201,169,97,.22);
+        }
+        .organizer-avatar {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.2rem;
+            border: 4px solid var(--gold);
+            box-shadow: 0 6px 20px rgba(201,169,97,.3);
+            background: rgba(212,165,116,.15);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .organizer-avatar .avatar-placeholder { font-size: 3.5rem; }
+        .organizer-avatar img {
+            display: none;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .organizer-card h3 { color: var(--secondary); font-size: 1.35rem; margin-bottom: .4rem; }
+        .organizer-card p  { color: #555; font-size: .9rem; }
+
+        /* ══ BADGES PARTICIPANTS ═════════════════════════════════════════ */
+        .sub-title {
+            text-align: center;
+            color: var(--accent);
+            font-size: 1.25rem;
+            margin: 2.5rem 0 1rem;
+        }
+        .badges-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.4rem;
+            margin: 1.5rem 0;
+        }
+        /* ── Badges pilotes : mini-cartes verticales ── */
+        .badge {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .7rem;
+            background: linear-gradient(135deg, rgba(212,165,116,.18), rgba(139,115,85,.18));
+            border: 2px solid var(--accent);
+            border-radius: 18px;
+            padding: 1.2rem 1.2rem .9rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            font-family: inherit;
+            transition: all .28s;
+            user-select: none;
+            width: 130px;
+        }
+        /* Grand avatar circulaire */
+        .badge-avatar {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(139,115,85,.2);
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 14px rgba(201,169,97,.25);
+            flex-shrink: 0;
+            font-size: 2.4rem;
+        }
+        .badge-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: none;
+        }
+        .badge:hover {
+            background: linear-gradient(135deg, rgba(212,165,116,.38), rgba(139,115,85,.38));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 28px rgba(201,169,97,.3);
+        }
+
+        /* ══ MODALE PARTICIPANTS ══════════════════════════════════════════ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.78);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .28s;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+        .modal-box {
+            background: linear-gradient(160deg, #e8e4de, #d4cec8);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            max-width: 340px;
+            width: 90%;
+            position: relative;
+            transform: scale(.84);
+            transition: transform .28s;
+            box-shadow: 0 20px 60px rgba(0,0,0,.7);
+        }
+        .modal-overlay.open .modal-box { transform: scale(1); }
+
+        .modal-close {
+            position: absolute;
+            top: .8rem; right: 1rem;
+            background: none; border: none;
+            color: var(--secondary); font-size: 1.8rem;
+            cursor: pointer; line-height: 1; padding: 0;
+        }
+
+        .modal-avatar {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1.2rem;
+            border: 4px solid var(--gold);
+            box-shadow: 0 6px 20px rgba(201,169,97,.4);
+            background: rgba(212,165,116,.15);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-avatar .avatar-placeholder { font-size: 3.5rem; }
+        .modal-avatar img {
+            display: none;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .modal-name { font-size: 2rem; color: var(--secondary); font-weight: 700; margin-bottom: .6rem; }
+        .modal-desc { color: #444; font-size: 1rem; line-height: 1.7; }
+
+        /* ══ PADDOCK & CIRCUIT ═══════════════════════════════════════════ */
+        .paddock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .paddock-item h3 {
+            color: var(--accent);
+            font-size: 1.15rem;
+            margin-bottom: .8rem;
+            text-align: center;
+        }
+        .paddock-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            background: #000;
+            display: block;
+            box-shadow: 0 8px 28px rgba(0,0,0,.55);
+            border: none;
+        }
+
+        /* ══ CAROUSELS ═══════════════════════════════════════════════════ */
+        .carousel-wrap {
+            position: relative;
+            background: rgba(0,0,0,.08);
+            border-radius: 16px;
+            padding: 1.5rem 1.5rem 3rem;
+        }
+        .carousel-track-container { overflow: hidden; border-radius: 10px; }
+        .carousel-track {
+            display: flex;
+            transition: transform .45s cubic-bezier(.4,0,.2,1);
+        }
+        .carousel-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+        }
+        .carousel-slide img {
+            max-width: 100%;
+            max-height: 72vh;
+            border-radius: 10px;
+            object-fit: contain;
+            box-shadow: 0 10px 30px rgba(0,0,0,.5);
+            cursor: zoom-in;
+        }
+        .carousel-slide video {
+            width: 100%;
+            max-height: 72vh;
+            border-radius: 10px;
+            background: #000;
+        }
+        .carousel-slide iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 10px;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(212,165,116,.82);
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s, transform .2s;
+        }
+        .carousel-btn:hover { background: var(--primary); transform: translateY(-50%) scale(1.1); }
+        .carousel-btn.prev { left: 6px; }
+        .carousel-btn.next { right: 6px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: .8rem;
+            margin-top: 1.2rem;
+        }
+        .dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: rgba(0,0,0,.18);
+            cursor: pointer;
+            border: 2px solid var(--accent);
+            transition: all .25s;
+        }
+        .dot.active { background: var(--primary); width: 26px; border-radius: 8px; }
+
+        .carousel-empty {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--accent);
+            font-style: italic;
+            background: rgba(212,165,116,.07);
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.94);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 95vw; max-height: 95vh; object-fit: contain; border-radius: 8px; }
+        .lightbox-close {
+            position: absolute;
+            top: 1rem; right: 1.5rem;
+            color: #fff; font-size: 2.5rem;
+            cursor: pointer; background: none; border: none; line-height: 1;
+        }
+
+        /* ══ TROPHÉES ════════════════════════════════════════════════════ */
+        .trophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .trophy-card {
+            background: linear-gradient(135deg, rgba(201,169,97,.12), rgba(212,165,116,.12));
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            min-height: 340px;
+            display: flex; align-items: center; justify-content: center;
+            perspective: 900px;
+            transition: box-shadow .3s;
+        }
+        .trophy-card:hover { box-shadow: 0 8px 32px rgba(201,169,97,.3); }
+        .trophy-card.spinning { animation: spinTwice 1.6s ease-in-out forwards; pointer-events: none; }
+        .trophy-card.revealed { cursor: default; box-shadow: 0 8px 32px rgba(201,169,97,.4); }
+
+        @keyframes spinTwice {
+            0%   { transform: rotateY(0deg); }
+            100% { transform: rotateY(720deg); }
+        }
+
+        .trophy-front, .trophy-back { width: 100%; }
+        .trophy-card.revealed .trophy-front { display: none; }
+        .trophy-back { display: none; }
+        .trophy-card.revealed .trophy-back { display: block; }
+
+        .trophy-emoji {
+            font-size: 3rem; margin-bottom: .8rem;
+            display: block;
+            animation: bounce 2.5s ease-in-out infinite;
+        }
+        .trophy-card:nth-child(1) .trophy-emoji { animation-delay:  .0s; }
+        .trophy-card:nth-child(2) .trophy-emoji { animation-delay:  .3s; }
+        .trophy-card:nth-child(3) .trophy-emoji { animation-delay:  .6s; }
+        .trophy-card:nth-child(4) .trophy-emoji { animation-delay:  .9s; }
+        .trophy-card:nth-child(5) .trophy-emoji { animation-delay: 1.2s; }
+        .trophy-card:nth-child(6) .trophy-emoji { animation-delay: 1.5s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-16px); }
+        }
+
+        .trophy-card h3 { color: var(--secondary); font-size: 1rem; margin: .4rem 0 .25rem; font-weight: 700; }
+        .trophy-card p  { color: #555; font-size: .82rem; }
+
+        .trophy-avatar {
+            width: 160px; height: 220px;
+            border-radius: 14px;
+            object-fit: cover;
+            object-position: top center;
+            border: 4px solid var(--gold);
+            box-shadow: 0 6px 18px rgba(201,169,97,.45);
+            margin-bottom: .8rem;
+            background: rgba(212,165,116,.15);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .trophy-winner {
+            color: var(--primary);
+            font-size: 1rem; font-weight: 700;
+            margin-top: .35rem;
+        }
+        .trophy-hint {
+            text-align: center;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: .95rem;
+        }
+
+        /* ══ TOP PILOTE ══════════════════════════════════════════════════ */
+        .top-pilote-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 16px;
+            background: #000;
+            box-shadow: 0 12px 42px rgba(0,0,0,.65);
+            display: block;
+            border: none;
+        }
+
+        /* ══ FOOTER ══════════════════════════════════════════════════════ */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(0,0,0,.15);
+            border-top: 2px solid var(--accent);
+            color: #444;
+            margin-top: 4rem;
+        }
+        footer p { margin: .35rem 0; }
+        footer .footer-icon { font-size: 2rem; margin-bottom: .8rem; }
+
+        /* ══ RESPONSIVE ══════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .trophy-grid { grid-template-columns: repeat(2, 1fr); }
+            .organizers-row { flex-direction: column; align-items: center; }
+            .paddock-grid { grid-template-columns: 1fr; }
+            .carousel-slide { min-height: 220px; }
+        }
+        @media (max-width: 480px) {
+            .trophy-grid { grid-template-columns: 1fr 1fr; }
+            .badge { width: 110px; padding: 1rem .8rem .7rem; }
+            .badge-avatar { width: 72px; height: 72px; font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     1. HERO
+══════════════════════════════════════════════════════════════ -->
+<header class="hero">
+
+    <!-- Moto gauche (symétrisée par CSS scaleX(-1) dans l'animation) -->
+    <div class="moto-wrap moto-left" aria-hidden="true">
+        <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Roues -->
+            <circle cx="52"  cy="112" r="32" fill="none" stroke="rgba(212,165,116,.52)" stroke-width="5"/>
+            <circle cx="52"  cy="112" r="17" fill="none" stroke="rgba(212,165,116,.22)" stroke-width="3"/>
+            <circle cx="186" cy="112" r="32" fill="none" stroke="rgba(212,165,116,.52)" stroke-width="5"/>
+            <circle cx="186" cy="112" r="17" fill="none" stroke="rgba(212,165,116,.22)" stroke-width="3"/>
+            <!-- Cadre principal -->
+            <polyline points="52,112 84,66 118,60 155,66 186,112"
+                      fill="none" stroke="rgba(212,165,116,.58)" stroke-width="4.5"
+                      stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Potence selle -->
+            <line x1="108" y1="60" x2="99" y2="42"
+                  stroke="rgba(212,165,116,.52)" stroke-width="4" stroke-linecap="round"/>
+            <!-- Selle -->
+            <path d="M 93 40 Q 112 33 134 42"
+                  fill="none" stroke="rgba(212,165,116,.62)" stroke-width="5" stroke-linecap="round"/>
+            <!-- Potence guidon -->
+            <line x1="158" y1="64" x2="171" y2="36"
+                  stroke="rgba(212,165,116,.52)" stroke-width="4" stroke-linecap="round"/>
+            <!-- Guidon -->
+            <line x1="162" y1="31" x2="181" y2="41"
+                  stroke="rgba(212,165,116,.65)" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Pilote – tête -->
+            <circle cx="110" cy="22" r="11" fill="rgba(212,165,116,.45)"/>
+            <!-- Pilote – corps -->
+            <polyline points="110,33 106,48 91,45"
+                      fill="none" stroke="rgba(212,165,116,.48)" stroke-width="4.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Pilote – bras vers guidon -->
+            <path d="M 106 43 Q 140 40 171 37"
+                  fill="none" stroke="rgba(212,165,116,.42)" stroke-width="4" stroke-linecap="round"/>
+            <!-- Pilote – jambes -->
+            <polyline points="106,48 108,76 78,100"
+                      fill="none" stroke="rgba(212,165,116,.48)" stroke-width="4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Bloc moteur -->
+            <rect x="88" y="72" width="50" height="28" rx="6"
+                  fill="rgba(212,165,116,.14)" stroke="rgba(212,165,116,.34)" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <!-- Contenu central -->
+    <div class="hero-content">
+        <h1>TRIAL DES PATATES</h1>
+        <p class="hero-subtitle">Un événement en famille</p>
+        <p class="hero-subtitle">Organisation : Daniel &amp; Alain</p>
+        <p class="hero-date">📍 Beaumarais, Ardèche — 22 Mars 2026</p>
+    </div>
+
+    <!-- Moto droite (même SVG, symétrie gérée par motorockR qui n'a pas de scaleX) -->
+    <div class="moto-wrap moto-right" aria-hidden="true">
+        <svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="52"  cy="112" r="32" fill="none" stroke="rgba(212,165,116,.52)" stroke-width="5"/>
+            <circle cx="52"  cy="112" r="17" fill="none" stroke="rgba(212,165,116,.22)" stroke-width="3"/>
+            <circle cx="186" cy="112" r="32" fill="none" stroke="rgba(212,165,116,.52)" stroke-width="5"/>
+            <circle cx="186" cy="112" r="17" fill="none" stroke="rgba(212,165,116,.22)" stroke-width="3"/>
+            <polyline points="52,112 84,66 118,60 155,66 186,112"
+                      fill="none" stroke="rgba(212,165,116,.58)" stroke-width="4.5"
+                      stroke-linejoin="round" stroke-linecap="round"/>
+            <line x1="108" y1="60" x2="99" y2="42"
+                  stroke="rgba(212,165,116,.52)" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 93 40 Q 112 33 134 42"
+                  fill="none" stroke="rgba(212,165,116,.62)" stroke-width="5" stroke-linecap="round"/>
+            <line x1="158" y1="64" x2="171" y2="36"
+                  stroke="rgba(212,165,116,.52)" stroke-width="4" stroke-linecap="round"/>
+            <line x1="162" y1="31" x2="181" y2="41"
+                  stroke="rgba(212,165,116,.65)" stroke-width="4.5" stroke-linecap="round"/>
+            <circle cx="110" cy="22" r="11" fill="rgba(212,165,116,.45)"/>
+            <polyline points="110,33 106,48 91,45"
+                      fill="none" stroke="rgba(212,165,116,.48)" stroke-width="4.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 106 43 Q 140 40 171 37"
+                  fill="none" stroke="rgba(212,165,116,.42)" stroke-width="4" stroke-linecap="round"/>
+            <polyline points="106,48 108,76 78,100"
+                      fill="none" stroke="rgba(212,165,116,.48)" stroke-width="4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="88" y="72" width="50" height="28" rx="6"
+                  fill="rgba(212,165,116,.14)" stroke="rgba(212,165,116,.34)" stroke-width="2"/>
+        </svg>
+    </div>
+
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     2. SPONSORS
+══════════════════════════════════════════════════════════════ -->
+<div class="sponsors-bar">
+    <img src="sponsor1.jpg" alt="Sponsor Dherbey (fond bleu)"  onerror="this.style.display='none'">
+    <img src="sponsor2.jpg" alt="Sponsor Dherbey (fond blanc)" onerror="this.style.display='none'">
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     3. LIEU – ZOOM SCROLL (zoom_000.jpeg → zoom_120.jpeg)
+══════════════════════════════════════════════════════════════ -->
+<div class="zoom-section" id="zoomSection">
+    <div class="zoom-sticky" id="zoomSticky">
+        <img class="zoom-frame" id="zoomFrame" src="zoom_000.jpeg"
+             alt="Zoom progressif vers Beaumarais, Ardèche">
+        <div class="zoom-overlay"></div>
+        <div class="zoom-caption">
+            <h2>📍 Lieu de l'Événement</h2>
+            <p>Beaumarais, Ardèche</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     4. ÉQUIPE – CHEFS D'ORCHESTRE & PARTICIPANTS
+══════════════════════════════════════════════════════════════ -->
+<div class="section" id="equipe">
+    <h2 class="section-title">🏁 L'Équipe</h2>
+
+    <!-- Chefs d'orchestre -->
+    <p class="sub-title">Les Chefs d'Orchestre</p>
+    <div class="organizers-row">
+
+        <div class="organizer-card">
+            <div class="organizer-avatar">
+                <span class="avatar-placeholder">🏍️</span>
+                <img src="daniel.jpg" alt="Daniel"
+                     onload="this.previousElementSibling.style.display='none'; this.style.display='block'"
+                     onerror="this.remove()">
+            </div>
+            <h3>Daniel</h3>
+            <p>Architecte du parcours et maître de cérémonie</p>
+        </div>
+
+        <div class="organizer-card">
+            <div class="organizer-avatar">
+                <span class="avatar-placeholder">🏍️</span>
+                <img src="alain.jpg" alt="Alain"
+                     onload="this.previousElementSibling.style.display='none'; this.style.display='block'"
+                     onerror="this.remove()">
+            </div>
+            <h3>Alain</h3>
+            <p>Co-organisateur et garant de l'ambiance</p>
+        </div>
+
+    </div>
+
+    <!-- Participants -->
+    <p class="sub-title">🏍️ Les Pilotes — cliquez pour découvrir !</p>
+    <div class="badges-row">
+
+        <button class="badge" onclick="openModal('Agathe','agathe.jpg','Pilote déterminée — la fatigue, elle ne connaît pas.')">
+            <span class="badge-avatar">
+                <img src="agathe.jpg" alt=""
+                     onload="this.style.display='block'; this.nextElementSibling.style.display='none'"
+                     onerror="this.remove()">
+                <span>🏍️</span>
+            </span>
+            Agathe
+        </button>
+
+        <button class="badge" onclick="openModal('Océane','oceane.jpg','Grâce et précision sur chaque obstacle, classe jusqu\'au bout des gants.')">
+            <span class="badge-avatar">
+                <img src="oceane.jpg" alt=""
+                     onload="this.style.display='block'; this.nextElementSibling.style.display='none'"
+                     onerror="this.remove()">
+                <span>🏍️</span>
+            </span>
+            Océane
+        </button>
+
+        <button class="badge" onclick="openModal('Mathias','mathias.jpg','Bravade assumée — chaque zone est un défi à relever sans hésiter.')">
+            <span class="badge-avatar">
+                <img src="mathias.jpg" alt=""
+                     onload="this.style.display='block'; this.nextElementSibling.style.display='none'"
+                     onerror="this.remove()">
+                <span>🏍️</span>
+            </span>
+            Mathias
+        </button>
+
+        <button class="badge" onclick="openModal('Antonin','antonin.jpg','Pied à terre, pied en l\'air — le chrono est son meilleur ami.')">
+            <span class="badge-avatar">
+                <img src="antonin.jpg" alt=""
+                     onload="this.style.display='block'; this.nextElementSibling.style.display='none'"
+                     onerror="this.remove()">
+                <span>🏍️</span>
+            </span>
+            Antonin
+        </button>
+
+        <button class="badge" onclick="openModal('Estebane','estebane.jpg','Analyse, calcule, passe. La technique comme seconde nature.')">
+            <span class="badge-avatar">
+                <img src="estebane.jpg" alt=""
+                     onload="this.style.display='block'; this.nextElementSibling.style.display='none'"
+                     onerror="this.remove()">
+                <span>🏍️</span>
+            </span>
+            Estebane
+        </button>
+
+        <button class="badge" onclick="openModal('Côme','come.jpg','Trial dans l\'âme, dans les gènes et jusque dans le regard.')">
+            <span class="badge-avatar">
+                <img src="come.jpg" alt=""
+                     onload="this.style.display='block'; this.nextElementSibling.style.display='none'"
+                     onerror="this.remove()">
+                <span>🏍️</span>
+            </span>
+            Côme
+        </button>
+
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     5. PADDOCK & CIRCUIT
+     Note : .mov est supporté nativement sur Chrome/Edge/Safari.
+     Firefox peut nécessiter une conversion préalable en .mp4.
+══════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">🏕️ Paddock &amp; Circuit</h2>
+    <div class="paddock-grid">
+
+        <div class="paddock-item">
+            <h3>🏕️ Le Paddock</h3>
+            <iframe class="paddock-video"
+                src="https://www.youtube-nocookie.com/embed/VyqNkPWHwyM"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="paddock-item">
+            <h3>🗺️ Le Circuit (par Méline)</h3>
+            <iframe class="paddock-video"
+                src="https://www.youtube-nocookie.com/embed/Wr0XCWyB29o"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     6. GALERIE PHOTOS  (p1.jpg, p2.jpg, … — chargement dynamique)
+══════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">📷 Galerie Photos</h2>
+    <div class="carousel-wrap" id="photosCarousel">
+        <div class="carousel-track-container">
+            <div class="carousel-track" id="photosTrack"></div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel('photos',-1)" aria-label="Photo précédente">❮</button>
+        <button class="carousel-btn next" onclick="moveCarousel('photos', 1)" aria-label="Photo suivante">❯</button>
+        <div class="carousel-dots" id="photosDots"></div>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     7. GALERIE VIDÉOS  (v1.mp4, v2.mp4, … — chargement dynamique)
+══════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">🎬 Galerie Vidéos</h2>
+    <div class="carousel-wrap" id="videosCarousel">
+        <div class="carousel-track-container">
+            <div class="carousel-track" id="videosTrack"></div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel('videos',-1)" aria-label="Vidéo précédente">❮</button>
+        <button class="carousel-btn next" onclick="moveCarousel('videos', 1)" aria-label="Vidéo suivante">❯</button>
+        <div class="carousel-dots" id="videosDots"></div>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     8. REMISE DES TROPHÉES
+══════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">🏆 Remise des Trophées</h2>
+    <p class="trophy-hint">Cliquez sur une carte pour révéler le lauréat !</p>
+
+    <div class="trophy-grid">
+
+        <!-- 1 – Le Plus Rapide → Antonin -->
+        <div class="trophy-card" onclick="flipTrophy(this)">
+            <div class="trophy-front">
+                <span class="trophy-emoji">🏎️</span>
+                <h3>Le Plus Rapide</h3>
+                <p>Fulgurance à l'état pur</p>
+            </div>
+            <div class="trophy-back">
+                <img src="antonin.jpg" alt="Antonin" class="trophy-avatar"
+                     onerror="this.outerHTML='<div style=\'font-size:4rem\'>🏍️</div>'">
+                <div class="trophy-winner">Antonin</div>
+                <h3>Le Plus Rapide 🏎️</h3>
+            </div>
+        </div>
+
+        <!-- 2 – Le Plus Technique → Estebane -->
+        <div class="trophy-card" onclick="flipTrophy(this)">
+            <div class="trophy-front">
+                <span class="trophy-emoji">⚙️</span>
+                <h3>Le Plus Technique</h3>
+                <p>Maîtrise et précision</p>
+            </div>
+            <div class="trophy-back">
+                <img src="estebane.jpg" alt="Estebane" class="trophy-avatar"
+                     onerror="this.outerHTML='<div style=\'font-size:4rem\'>🏍️</div>'">
+                <div class="trophy-winner">Estebane</div>
+                <h3>Le Plus Technique ⚙️</h3>
+            </div>
+        </div>
+
+        <!-- 3 – Le Plus Trial → Côme -->
+        <div class="trophy-card" onclick="flipTrophy(this)">
+            <div class="trophy-front">
+                <span class="trophy-emoji">🎯</span>
+                <h3>Le Plus Trial</h3>
+                <p>Trial dans l'âme</p>
+            </div>
+            <div class="trophy-back">
+                <img src="come.jpg" alt="Côme" class="trophy-avatar"
+                     onerror="this.outerHTML='<div style=\'font-size:4rem\'>🏍️</div>'">
+                <div class="trophy-winner">Côme</div>
+                <h3>Le Plus Trial 🎯</h3>
+            </div>
+        </div>
+
+        <!-- 4 – Le Plus Casse-Cou → Mathias -->
+        <div class="trophy-card" onclick="flipTrophy(this)">
+            <div class="trophy-front">
+                <span class="trophy-emoji">🔥</span>
+                <h3>Le Plus Casse-Cou</h3>
+                <p>L'audace récompensée</p>
+            </div>
+            <div class="trophy-back">
+                <img src="mathias.jpg" alt="Mathias" class="trophy-avatar"
+                     onerror="this.outerHTML='<div style=\'font-size:4rem\'>🏍️</div>'">
+                <div class="trophy-winner">Mathias</div>
+                <h3>Le Plus Casse-Cou 🔥</h3>
+            </div>
+        </div>
+
+        <!-- 5 – La Plus Enduro → Agathe -->
+        <div class="trophy-card" onclick="flipTrophy(this)">
+            <div class="trophy-front">
+                <span class="trophy-emoji">💪</span>
+                <h3>La Plus Enduro</h3>
+                <p>Endurance à toute épreuve</p>
+            </div>
+            <div class="trophy-back">
+                <img src="agathe.jpg" alt="Agathe" class="trophy-avatar"
+                     onerror="this.outerHTML='<div style=\'font-size:4rem\'>🏍️</div>'">
+                <div class="trophy-winner">Agathe</div>
+                <h3>La Plus Enduro 💪</h3>
+            </div>
+        </div>
+
+        <!-- 6 – La Plus Stylée → Océane -->
+        <div class="trophy-card" onclick="flipTrophy(this)">
+            <div class="trophy-front">
+                <span class="trophy-emoji">✨</span>
+                <h3>La Plus Stylée</h3>
+                <p>Élégance en toutes zones</p>
+            </div>
+            <div class="trophy-back">
+                <img src="oceane.jpg" alt="Océane" class="trophy-avatar"
+                     onerror="this.outerHTML='<div style=\'font-size:4rem\'>🏍️</div>'">
+                <div class="trophy-winner">Océane</div>
+                <h3>La Plus Stylée ✨</h3>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     9. TOP PILOTE DU JOUR
+══════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">🎬 Le Top Pilote du Jour</h2>
+    <iframe class="top-pilote-video"
+        src="https://www.youtube-nocookie.com/embed/BHvYc0XE6uE"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     10. FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-icon">🏍️</div>
+    <p><strong>Trial des Patates</strong> — 22 Mars 2026 — Beaumarais, Ardèche</p>
+    <p>Un souvenir en famille, une passion commune</p>
+    <p style="margin-top:.8rem;font-size:.85rem;">© 2026 | Album souvenir</p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     MODALE PARTICIPANTS
+══════════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="participantModal"
+     onclick="if(event.target===this) closeModal()" role="dialog" aria-modal="true">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()" aria-label="Fermer">×</button>
+        <div class="modal-avatar" id="modalAvatar">
+            <span class="avatar-placeholder" id="modalPlaceholder">🏍️</span>
+            <img id="modalImg" src="" alt="">
+        </div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+    </div>
+</div>
+
+
+<!-- LIGHTBOX PHOTO -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">×</button>
+    <img id="lightboxImg" src="" alt="Agrandissement photo">
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+/* ── ZOOM SCROLL ──────────────────────────────────────────────── */
+(function () {
+    const section = document.getElementById('zoomSection');
+    const frame   = document.getElementById('zoomFrame');
+    const TOTAL   = 120;
+    let   last    = -1;
+
+    // Précharge une fenêtre de ±8 images autour de l'index courant
+    const preloaded = {};
+    function preload(idx) {
+        const lo = Math.max(0, idx - 8);
+        const hi = Math.min(TOTAL, idx + 8);
+        for (let i = lo; i <= hi; i++) {
+            if (!preloaded[i]) {
+                const img = new Image();
+                img.src = 'zoom_' + String(i).padStart(3, '0') + '.jpeg';
+                preloaded[i] = img;
+            }
+        }
+    }
+
+    function update() {
+        const rect      = section.getBoundingClientRect();
+        const range     = section.offsetHeight - window.innerHeight;
+        if (range <= 0) return;
+        const progress  = Math.min(1, Math.max(0, -rect.top / range));
+        const idx       = Math.round(progress * TOTAL);
+        if (idx === last) return;
+        last = idx;
+        frame.src = 'zoom_' + String(idx).padStart(3, '0') + '.jpeg';
+        preload(idx);
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    preload(0);
+    update();
+})();
+
+
+/* ── MODALE PARTICIPANTS ──────────────────────────────────────── */
+function openModal(name, imgSrc, desc) {
+    const overlay     = document.getElementById('participantModal');
+    const img         = document.getElementById('modalImg');
+    const placeholder = document.getElementById('modalPlaceholder');
+
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalDesc').textContent = desc;
+
+    // Réinitialise l'avatar
+    placeholder.style.display = '';
+    img.style.display = 'none';
+    img.src = '';
+
+    // Charge l'image
+    const tmp = new Image();
+    tmp.onload = () => {
+        img.src = imgSrc;
+        img.alt = name;
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+    };
+    tmp.onerror = () => {
+        placeholder.style.display = '';
+        placeholder.textContent = '🏍️';
+    };
+    tmp.src = imgSrc;
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('participantModal').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeLightbox(); }
+});
+
+
+/* ── CARROUSELS ───────────────────────────────────────────────── */
+const _carousels = {};
+
+function _buildDots(id) {
+    const c    = _carousels[id];
+    const dots = document.getElementById(id + 'Dots');
+    dots.innerHTML = '';
+    for (let i = 0; i < c.count; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === c.index ? ' active' : '');
+        d.onclick   = () => _goTo(id, i);
+        dots.appendChild(d);
+    }
+}
+
+function _goTo(id, i) {
+    const c     = _carousels[id];
+    const track = document.getElementById(id + 'Track');
+    // Pause vidéo du slide actuel
+    const cur = track.children[c.index];
+    if (cur) { const v = cur.querySelector('video'); if (v) v.pause(); }
+    c.index = i;
+    track.style.transform = 'translateX(' + (-i * 100) + '%)';
+    _buildDots(id);
+}
+
+function moveCarousel(id, dir) {
+    const c = _carousels[id];
+    if (!c || c.count === 0) return;
+    _goTo(id, (c.index + dir + c.count) % c.count);
+}
+
+// Navigation clavier sur les photos
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  moveCarousel('photos', -1);
+    if (e.key === 'ArrowRight') moveCarousel('photos',  1);
+});
+
+function _hideCarouselBtns(id) {
+    const wrap = document.getElementById(id + 'Carousel');
+    wrap.querySelectorAll('.carousel-btn').forEach(b => b.style.display = 'none');
+}
+
+
+/* ── CHARGEMENT DYNAMIQUE DES PHOTOS ─────────────────────────── */
+(function () {
+    const track = document.getElementById('photosTrack');
+    _carousels['photos'] = { index: 0, count: 0 };
+    let n = 1;
+
+    function probe() {
+        const img = new Image();
+        img.onload = () => {
+            // Ajoute le slide
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            const el = document.createElement('img');
+            el.src     = 'p' + n + '.jpg';
+            el.alt     = 'Photo ' + n;
+            el.loading = 'lazy';
+            el.onclick = () => openLightbox(el.src);
+            slide.appendChild(el);
+            track.appendChild(slide);
+            _carousels['photos'].count++;
+            _buildDots('photos');
+            n++;
+            probe();
+        };
+        img.onerror = () => {
+            if (_carousels['photos'].count === 0) {
+                track.innerHTML = '<div class="carousel-empty">Aucune photo trouvée — placez p1.jpg, p2.jpg… dans le dossier.</div>';
+                _hideCarouselBtns('photos');
+            }
+        };
+        img.src = 'p' + n + '.jpg';
+    }
+
+    probe();
+})();
+
+
+/* ── VIDÉOS GALERIE — YouTube embeds ─────────────────────────── */
+(function () {
+    const track = document.getElementById('videosTrack');
+    _carousels['videos'] = { index: 0, count: 0 };
+
+    const ids = [
+        'RfDTA9SbQN8', // v1
+        'c3tNiSCPX-8', // v2
+        'QFZCFVf6kyE', // v3
+        'cpGqTCjj35c', // v4
+        // Ajouter ici les IDs v5-v8 quand disponibles
+    ];
+
+    ids.forEach(id => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + id;
+        iframe.allowFullscreen = true;
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        slide.appendChild(iframe);
+        track.appendChild(slide);
+        _carousels['videos'].count++;
+    });
+
+    _buildDots('videos');
+})();
+
+
+/* ── TROPHÉES : double flip ───────────────────────────────────── */
+function flipTrophy(card) {
+    // Ignore si déjà en cours ou révélé
+    if (card.classList.contains('spinning') || card.classList.contains('revealed')) return;
+    card.classList.add('spinning');
+    // Après 1,6 s (2 rotations complètes), on révèle la face arrière
+    setTimeout(() => {
+        card.classList.remove('spinning');
+        card.classList.add('revealed');
+    }, 1600);
+}
+
+
+/* ── LIGHTBOX ─────────────────────────────────────────────────── */
+function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+</script>
+
+</body>
+</html>
