@@ -592,6 +592,54 @@
             .badge { width: 110px; padding: 1rem .8rem .7rem; }
             .badge-avatar { width: 72px; height: 72px; font-size: 2rem; }
         }
+
+        /* ── BOUTON MUSIQUE FLOTTANT ───────────────────────────────── */
+        #musicBtn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            height: 52px;
+            padding: 0 18px 0 14px;
+            border-radius: 26px;
+            border: none;
+            cursor: pointer;
+            background: rgba(107, 53, 21, 0.92);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.45);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background .2s, transform .15s;
+            backdrop-filter: blur(4px);
+        }
+        @keyframes musicFloat {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-6px); }
+        }
+        #musicBtn {
+            animation: musicFloat 2.4s ease-in-out infinite;
+        }
+        #musicBtn:hover {
+            background: rgba(122, 62, 24, 1);
+            animation-play-state: paused;
+            transform: scale(1.05);
+        }
+        #musicBtn svg { width: 22px; height: 22px; fill: #f0c890; flex-shrink: 0; }
+        #musicBtn .btn-label {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #f0c890;
+            white-space: nowrap;
+            letter-spacing: .5px;
+        }
+        #musicBtn .icon-pause { display: none; }
+        #musicBtn.playing .icon-play   { display: none; }
+        #musicBtn.playing .icon-pause  { display: block; }
+        #musicBtn.playing .label-play  { display: none; }
+        #musicBtn.playing .label-pause { display: inline; }
+        #musicBtn .label-pause { display: none; }
+
     </style>
 </head>
 <body>
@@ -1336,6 +1384,55 @@ function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
 }
+</script>
+
+<!-- ── MUSIQUE FOND ─────────────────────────────────────────── -->
+<audio id="bgMusic" src="ambiance.mp3" loop preload="auto"></audio>
+
+<button id="musicBtn" title="Musique" aria-label="Lecture / Pause musique">
+    <svg class="icon-play"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    <span class="btn-label">
+        <span class="label-play">♪ Clique ici</span>
+        <span class="label-pause">Pause</span>
+    </span>
+</button>
+
+<script>
+/* ── MUSIQUE DE FOND ───────────────────────────────────────── */
+(function () {
+    const audio = document.getElementById('bgMusic');
+    const btn   = document.getElementById('musicBtn');
+
+    audio.volume = 0.4;
+
+    // Tente l'autoplay discret au premier clic/touche sur la page
+    let started = false;
+    function tryAutoplay() {
+        if (started) return;
+        started = true;
+        audio.play().then(() => btn.classList.add('playing')).catch(() => {});
+        document.removeEventListener('click', tryAutoplay);
+        document.removeEventListener('keydown', tryAutoplay);
+        document.removeEventListener('scroll', tryAutoplay);
+    }
+    document.addEventListener('click',   tryAutoplay, { once: true });
+    document.addEventListener('keydown',  tryAutoplay, { once: true });
+    document.addEventListener('scroll',   tryAutoplay, { once: true });
+
+    // Bouton play/pause manuel
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (audio.paused) {
+            audio.play();
+            btn.classList.add('playing');
+        } else {
+            audio.pause();
+            btn.classList.remove('playing');
+        }
+        started = true;
+    });
+})();
 </script>
 
 </body>
